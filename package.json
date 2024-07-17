@@ -12,19 +12,7 @@
     "test:e2e:dev": "start-server-and-test 'vite dev --port 4173' http://localhost:4173 'cypress open --e2e'",
     "lint": "eslint . --ext .ts,.js,.vue --ignore-path .gitignore",
     "format": "prettier --write ./",
-    "hooks:precommit": "lint-staged"
-  },
-  "lint-staged": {
-    "*.{ts,js,vue}": [
-      "npm run format",
-      "npm run lint --fix",
-      "git add"
-    ]
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run hooks:precommit"
-    }
+    "prepare": "husky"
   },
   "dependencies": {
     "pinia": "^2.1.7",
@@ -56,4 +44,3 @@
     "vue-tsc": "^2.0.21"
   }
 }
-
