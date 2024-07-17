@@ -1,61 +1,48 @@
-# vue3-starter
+# Vue 3 Application Template
 
-This template should help get you started developing with Vue 3 in Vite.
+## Flow:
 
-## Recommended IDE Setup
+1. `npm run prepare`
+2. `npm install`
+3. `npm run dev`
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+## Tech Stack:
 
-## Type Support for `.vue` Imports in TS
+- [Vue](https://vuejs.org/)
+- [Vite](https://vitejs.dev/guide/)
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+## Package Managers:
 
-## Customize configuration
+- npm
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+## Code Quality:
 
-## Project Setup
+- [ESLint](https://eslint.org/)
+- [Stylelint](https://stylelint.io/user-guide/get-started)
+- Git hooks ([Husky](https://typicode.github.io/husky/))
+- [Prettier](https://prettier.io/)
+- [Vitest](https://vitest.dev/guide/), [Cypres](https://www.cypress.io/)
 
-```sh
-npm install
-```
+## Architecture:
 
-### Compile and Hot-Reload for Development
+- [Feature-Sliced Design](https://feature-sliced.design/) (by default)
 
-```sh
-npm run dev
-```
+## Prerequisites:
 
-### Type-Check, Compile and Minify for Production
+- [Node.js](https://nodejs.org/) >=18
 
-```sh
-npm run build
-```
+[Commands](./package.json)
 
-### Run Unit Tests with [Vitest](https://vitest.dev/)
-
-```sh
-npm run test:unit
-```
-
-### Run End-to-End Tests with [Cypress](https://www.cypress.io/)
-
-```sh
-npm run test:e2e:dev
-```
-
-This runs the end-to-end tests against the Vite development server.
-It is much faster than the production build.
-
-But it's still recommended to test the production build with `test:e2e` before deploying (e.g. in CI environments):
-
-```sh
-npm run build
-npm run test:e2e
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+| Command              | Description                                                                      |
+| -------------------- | -------------------------------------------------------------------------------- |
+| `npm install`        | Installs dependencies                                                            |
+| `npm run dev`        | Starts local dev server at the port specified in [vite config](./vite.config.ts) |
+|                      |
+| `npm run build`      | Builds the project                                                               |
+| `npm run preview`    | Starts local server to serve `dist` folder on the specified port                 |
+| `npm run lint:js`    | Runs Javascript and Typescript linting using ESLint                              |
+| `npm run lint:style` | Runs style linting using Stylelint                                               |
+|                      |
+| `npm run test:unit`  | Runs unit tests using Vitest                                                     |
+| `npm run test:e2e`   | Runs e2e tests using Cypress                                                     |
+| `npm run format`     | Formats the codebase using Prettier                                              |
