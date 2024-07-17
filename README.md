@@ -21,7 +21,7 @@
 - [Stylelint](https://stylelint.io/user-guide/get-started)
 - Git hooks ([Husky](https://typicode.github.io/husky/))
 - [Prettier](https://prettier.io/)
-- [Vitest](https://vitest.dev/guide/), [Cypres](https://www.cypress.io/)
+- [Vitest](https://vitest.dev/guide/), [Vue Test Utils](https://test-utils.vuejs.org/), [Cypress](https://www.cypress.io/)
 
 ## Architecture:
 
