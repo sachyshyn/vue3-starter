@@ -5,7 +5,7 @@ import { createStoreProvider } from './store'
 export function applyProviders(app: App<Element>) {
   const providers = [createStoreProvider, createRouterProvider]
 
-  providers.forEach((createProvider) => {
-    app.use(createProvider())
+  providers.forEach((attachProvider) => {
+    attachProvider(app)
   })
 }
