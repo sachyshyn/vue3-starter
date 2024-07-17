@@ -10,8 +10,21 @@
     "test:unit": "vitest",
     "test:e2e": "start-server-and-test preview http://localhost:4173 'cypress run --e2e'",
     "test:e2e:dev": "start-server-and-test 'vite dev --port 4173' http://localhost:4173 'cypress open --e2e'",
-    "lint": "eslint . --ext .ts,.js,.vue --fix --ignore-path .gitignore",
-    "format": "prettier --write ./"
+    "lint": "eslint . --ext .ts,.js,.vue --ignore-path .gitignore",
+    "format": "prettier --write ./",
+    "hooks:precommit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.{ts,js,vue}": [
+      "npm run format",
+      "npm run lint --fix",
+      "git add"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run hooks:precommit"
+    }
   },
   "dependencies": {
     "pinia": "^2.1.7",
@@ -32,6 +45,7 @@
     "eslint": "^8.57.0",
     "eslint-plugin-cypress": "^3.3.0",
     "eslint-plugin-vue": "^9.23.0",
+    "husky": "^9.0.11",
     "jsdom": "^24.1.0",
     "npm-run-all2": "^6.2.0",
     "prettier": "^3.2.5",
@@ -42,3 +56,4 @@
     "vue-tsc": "^2.0.21"
   }
 }
+
