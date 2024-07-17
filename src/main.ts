@@ -1,5 +1,5 @@
-import { initApp } from './app'
+import { initApp } from './app';
 
-const app = initApp()
+const app = initApp();
 
-app.mount('#app')
+app.mount('#app');

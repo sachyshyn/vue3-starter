@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { APP_API_URL } from '@/shared/config'
+import { APP_API_URL } from '@/shared/config';
 </script>
 
 <template>
