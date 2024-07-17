@@ -8,4 +8,4 @@ function getEnvironmentVariable(key: string) {
   return environmentVariable
 }
 
-export const API_URL = getEnvironmentVariable('APP_API_URL')
+export const APP_API_URL = getEnvironmentVariable('APP_API_URL')
