@@ -3,7 +3,7 @@ import { ROUTES } from '@/shared/config/routes';
 import type { App } from 'vue';
 import { createRouter, createWebHistory } from 'vue-router';
 
-export function createRouterProvider(app: App<Element>) {
+function createRoutes() {
   const routes = [
     {
       path: ROUTES.HOME,
@@ -17,9 +17,13 @@ export function createRouterProvider(app: App<Element>) {
     }
   ];
 
+  return routes;
+}
+
+export function createRouterProvider(app: App<Element>) {
   const router = createRouter({
     history: createWebHistory(),
-    routes
+    routes: createRoutes()
   });
 
   app.use(router);
