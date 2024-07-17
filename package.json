@@ -10,7 +10,8 @@
     "test:unit": "vitest",
     "test:e2e": "start-server-and-test preview http://localhost:4173 'cypress run --e2e'",
     "test:e2e:dev": "start-server-and-test 'vite dev --port 4173' http://localhost:4173 'cypress open --e2e'",
-    "lint": "eslint . --ext .ts,.js,.vue --ignore-path .gitignore",
+    "lint:js": "eslint . --ext .ts,.js,.vue --ignore-path .gitignore",
+    "lint:style": "npx stylelint \"src/**/*.css\"",
     "format": "prettier --write ./",
     "prepare": "husky"
   },
@@ -38,6 +39,8 @@
     "npm-run-all2": "^6.2.0",
     "prettier": "^3.2.5",
     "start-server-and-test": "^2.0.4",
+    "stylelint": "^16.7.0",
+    "stylelint-config-standard": "^36.0.1",
     "typescript": "~5.4.0",
     "vite": "^5.3.1",
     "vitest": "^1.6.0",
