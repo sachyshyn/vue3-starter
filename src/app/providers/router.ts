@@ -1,6 +1,6 @@
 import Home from '@/pages/Home.vue';
 import { ROUTES } from '@/shared/config/routes';
-import type { App } from 'vue';
+import type { Application } from '@/shared/lib';
 import { createRouter, createWebHistory } from 'vue-router';
 
 function createRoutes() {
@@ -20,7 +20,7 @@ function createRoutes() {
   return routes;
 }
 
-export function createRouterProvider(app: App<Element>) {
+export function createRouterProvider(app: Application) {
   const router = createRouter({
     history: createWebHistory(),
     routes: createRoutes()

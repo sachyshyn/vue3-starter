@@ -1,7 +1,7 @@
+import type { Application } from '@/shared/lib';
 import { createPinia } from 'pinia';
-import type { App } from 'vue';
 
-export function createStoreProvider(app: App<Element>) {
+export function createStoreProvider(app: Application) {
   const store = createPinia();
 
   app.use(store);
