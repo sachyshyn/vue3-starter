@@ -6,7 +6,7 @@
 2. `npm install`
 3. `npm run dev`
 
-## Tech Stack:
+## Technical Stack:
 
 - [Vue](https://vuejs.org/)
 - [Vite](https://vitejs.dev/guide/)
@@ -25,7 +25,7 @@
 
 ## Architecture:
 
-- [Feature-Sliced Design](https://feature-sliced.design/) (by default)
+- [Feature-Sliced Design](https://feature-sliced.design/) (slightly augmented)
 
 ## Prerequisites:
 
