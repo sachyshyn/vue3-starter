@@ -4,6 +4,8 @@ FROM node:alpine as build-stage
 # Set environment variables
 ARG APP_API_URL="http://dockerized_vue_application.test"
 
+
+
 # Set the working directory in the container
 WORKDIR /app
 
@@ -12,6 +14,7 @@ COPY package*.json ./
 
 # Install dependencies
 RUN npm install
+RUN npm install @rollup/rollup-linux-x64-musl
 
 # Copy all files from current directory to the working directory in the container
 COPY . .
