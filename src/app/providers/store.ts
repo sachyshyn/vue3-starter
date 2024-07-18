@@ -5,6 +5,4 @@ export function createStoreProvider(app: Application) {
   const store = createPinia();
 
   app.use(store);
-
-  return app;
 }

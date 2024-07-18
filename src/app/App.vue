@@ -1,28 +1,35 @@
-<script setup lang="ts">
-import { APP_API_URL, ROUTES } from '@/shared/config';
-import { RouterLink, RouterView } from 'vue-router';
-
-const routes = [
-  { path: ROUTES.HOME, title: 'Home' },
-  { path: ROUTES.ABOUT, title: 'About' }
-];
-</script>
-
 <template>
   <header>
     <div class="container header__container">
-      <p>App Template with api url {{ APP_API_URL }}</p>
+      <p>{{ t('common.app_template_message', { api_url: APP_API_URL }) }}</p>
       <ul>
         <li v-for="route of routes" :key="route.path">
           <RouterLink :to="route.path">{{ route.title }}</RouterLink>
         </li>
       </ul>
+
+      <select v-model="locale" name="i18n-lang-changer">
+        <option value="en">en</option>
+        <option value="ru">ru</option>
+      </select>
     </div>
   </header>
-  <div class="container"></div>
 
   <RouterView />
 </template>
+
+<script setup lang="ts">
+import { APP_API_URL, ROUTES } from '@/shared/config';
+import { useI18n } from 'vue-i18n';
+import { RouterLink, RouterView } from 'vue-router';
+
+const routes = [
+  { path: ROUTES.HOME, title: 'home' },
+  { path: ROUTES.ABOUT, title: 'about' }
+];
+
+const { t, locale } = useI18n();
+</script>
 
 <style scoped>
 ul {

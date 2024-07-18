@@ -27,6 +27,4 @@ export function createRouterProvider(app: Application) {
   });
 
   app.use(router);
-
-  return app;
 }

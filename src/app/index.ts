@@ -3,9 +3,10 @@ import { createApp } from 'vue';
 import App from './App.vue';
 import { applyProviders } from './providers';
 
-export function initApp() {
+export async function initApp() {
   const app = createApp(App);
+
   applyProviders(app);
 
-  return app;
+  app.mount('#app');
 }
