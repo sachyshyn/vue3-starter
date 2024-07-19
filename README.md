@@ -2,8 +2,8 @@
 
 ## Flow:
 
-1. `npm run prepare`
-2. `npm install`
+1. `npm install`
+2. `npm run prepare`
 3. `npm run dev`
 
 ## Technical Stack:
