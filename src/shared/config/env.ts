@@ -1,3 +1,5 @@
+import type { Locale } from '../lib';
+
 function getEnvironmentVariable(key: string) {
   const environmentVariable = import.meta.env[key];
 
@@ -8,5 +10,5 @@ function getEnvironmentVariable(key: string) {
   return environmentVariable;
 }
 
-export const APP_API_URL = getEnvironmentVariable('APP_API_URL');
-export const APP_DEFAULT_LOCALE = getEnvironmentVariable('APP_DEFAULT_LOCALE');
+export const APP_API_URL: string = getEnvironmentVariable('APP_API_URL');
+export const APP_DEFAULT_LOCALE: Locale = getEnvironmentVariable('APP_DEFAULT_LOCALE');

@@ -1,7 +1,7 @@
 import { type App } from 'vue';
-import { LOCALES } from './constants';
+import { LOCALES } from '../config';
 
 export type Application = App<Element>;
 
 export type Locale = (typeof LOCALES)[number];
-export type LocaleMessage = Record<Locale, any>;
+export type LocaleMessages = Record<Locale, any>;

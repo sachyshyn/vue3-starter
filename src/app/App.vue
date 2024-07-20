@@ -8,11 +8,10 @@
         </li>
       </ul>
 
-      <button @click="setRuLocale()">fetch ru assets</button>
-
-      <select v-model="locale" name="i18n-lang-changer">
-        <option value="en">en</option>
-        <option value="ru">ru</option>
+      <select name="i18n-lang-changer" v-model="languageModel">
+        <option v-for="locale of translationService.availableLocales" :key="locale" :value="locale">
+          {{ locale }}
+        </option>
       </select>
     </div>
   </header>
@@ -22,21 +21,19 @@
 
 <script setup lang="ts">
 import { APP_API_URL, ROUTES } from '@/shared/config';
-import { loadTranslationMessages } from '@/shared/lib';
 import { useI18n } from 'vue-i18n';
 import { RouterLink, RouterView } from 'vue-router';
+import { translationService } from '@/shared/lib';
+import { useLanguage } from '@/features/change-language';
 
 const routes = [
   { path: ROUTES.HOME, title: 'home' },
   { path: ROUTES.ABOUT, title: 'about' }
 ];
 
-const { t, locale, setLocaleMessage } = useI18n();
+const { t } = useI18n();
 
-async function setRuLocale() {
-  const messages = await loadTranslationMessages('ru');
-  setLocaleMessage('ru', messages);
-}
+const languageModel = useLanguage();
 </script>
 
 <style scoped>
