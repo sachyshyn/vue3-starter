@@ -9,3 +9,4 @@ function getEnvironmentVariable(key: string) {
 }
 
 export const APP_API_URL = getEnvironmentVariable('APP_API_URL');
+export const APP_DEFAULT_LOCALE = getEnvironmentVariable('APP_DEFAULT_LOCALE');

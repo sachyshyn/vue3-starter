@@ -1,16 +1,14 @@
-import { ru, en } from '@/shared/config/locales';
-import { type Application } from '@/shared/lib';
+import { APP_DEFAULT_LOCALE } from '@/shared/config';
+
+import { type Application, type LocaleMessage } from '@/shared/lib';
 import { createI18n } from 'vue-i18n';
 
 export function createTranslationProvider(app: Application) {
   const i18n = createI18n({
     legacy: false,
-    locale: 'ru',
+    locale: APP_DEFAULT_LOCALE,
     fallbackLocale: 'en',
-    messages: {
-      ru,
-      en
-    }
+    messages: {} as LocaleMessage
   });
 
   app.use(i18n);

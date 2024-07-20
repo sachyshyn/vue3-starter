@@ -1,6 +1,6 @@
-import * as common from './common.json';
-import * as home from './home.json';
-import * as about from './about.json';
+import common from './common.json';
+import home from './home.json';
+import about from './about.json';
 
 export const ru = {
   common,
