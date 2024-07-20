@@ -1,12 +1,12 @@
-import { createRouterProvider } from './router';
-import { createStoreProvider } from './store';
-import { createTranslationProvider } from './translation';
+import { withRouterProvider } from './router';
+import { withStoreProvider } from './store';
+import { withTranslationProvider } from './translation';
 import type { Application } from '@/shared/lib';
 
 export function applyProviders(app: Application) {
-  const providers = [createStoreProvider, createRouterProvider, createTranslationProvider];
+  const providers = [withStoreProvider, withRouterProvider, withTranslationProvider];
 
-  providers.forEach((attachProvider) => {
-    attachProvider(app);
+  providers.forEach((withProvider) => {
+    withProvider(app);
   });
 }

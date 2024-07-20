@@ -20,7 +20,7 @@ function createRoutes() {
   return routes;
 }
 
-export function createRouterProvider(app: Application) {
+export function withRouterProvider(app: Application) {
   const router = createRouter({
     history: createWebHistory(),
     routes: createRoutes()
