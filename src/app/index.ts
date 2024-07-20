@@ -1,4 +1,4 @@
-import '@/shared/assets/main.css';
+import '@/shared/assets/styles/main.css';
 import { createApp } from 'vue';
 import App from './App.vue';
 import { applyProviders } from './providers';
