@@ -1,7 +1,7 @@
 <template>
   <header>
     <div class="container header__container">
-      <p>{{ t('common.app_template_message', { api_url: APP_API_URL }) }}</p>
+      <p>{{ $t('common.app_template_message', { api_url: APP_API_URL }) }}</p>
       <ul>
         <li v-for="route of routes" :key="route.path">
           <RouterLink :to="route.path">{{ route.title }}</RouterLink>
@@ -21,7 +21,6 @@
 
 <script setup lang="ts">
 import { APP_API_URL, ROUTES } from '@/shared/config';
-import { useI18n } from 'vue-i18n';
 import { RouterLink, RouterView } from 'vue-router';
 import { translationService } from '@/shared/lib';
 import { useLanguage } from '@/features/change-language';
@@ -30,8 +29,6 @@ const routes = [
   { path: ROUTES.HOME, title: 'home' },
   { path: ROUTES.ABOUT, title: 'about' }
 ];
-
-const { t } = useI18n();
 
 const languageModel = useLanguage();
 </script>
