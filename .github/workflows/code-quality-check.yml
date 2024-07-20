@@ -1,0 +1,49 @@
+# @prettier
+
+name: Linting
+
+on:
+  pull_request:
+    branches:
+      - develop
+      - main
+      - staging
+  push:
+    branches:
+      - develop
+      - main
+      - staging
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18.x]
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Checking cached npm modules
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.npm
+            **/node_modules
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-modules-
+
+      - name: Installing dependencies
+        run: npm ci
+
+      - name: Linting JavaScript
+        run: npm run lint:js
+
+      - name: Linting Styles
+        run: npm run lint:styles
