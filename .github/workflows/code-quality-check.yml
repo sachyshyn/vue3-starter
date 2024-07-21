@@ -47,3 +47,6 @@ jobs:
 
       - name: Linting Styles
         run: npm run lint:style
+
+      - name: Unit Testing
+        run: npm run test:unit

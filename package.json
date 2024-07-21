@@ -10,7 +10,7 @@
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build --mode production",
     "preview": "vite preview",
-    "test:unit": "vitest",
+    "test:unit": "vitest run",
     "test:e2e": "start-server-and-test preview http://localhost:4173 'cypress run --e2e'",
     "lint:js": "eslint . --ext .ts,.js,.vue --ignore-path .gitignore",
     "lint:style": "npx stylelint \"src/**/*.css\"",
