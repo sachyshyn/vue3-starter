@@ -30,11 +30,11 @@ export default defineConfig({
           }
 
           if (/woff|woff2|eot|ttf|otf/.test(extType)) {
-            return 'assets/fonts/[name]-[hash][extname]';
+            return 'assets/fonts/[name][extname]';
           }
 
           if (/png|jpe?g|svg|gif|ico|webp|avif/.test(extType)) {
-            return 'assets/images/[name]-[hash][extname]';
+            return 'assets/images/[name][extname]';
           }
 
           return 'assets/[name]-[hash][extname]';
