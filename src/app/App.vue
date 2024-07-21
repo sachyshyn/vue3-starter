@@ -8,11 +8,7 @@
         </li>
       </ul>
 
-      <select name="i18n-lang-changer" v-model="languageModel">
-        <option v-for="locale of translationService.availableLocales" :key="locale" :value="locale">
-          {{ locale }}
-        </option>
-      </select>
+      <ChangeLanguageSelect />
     </div>
   </header>
 
@@ -22,15 +18,12 @@
 <script setup lang="ts">
 import { APP_API_URL, ROUTES } from '@/shared/config';
 import { RouterLink, RouterView } from 'vue-router';
-import { translationService } from '@/shared/lib';
-import { useLanguage } from '@/features/change-language';
+import { ChangeLanguageSelect } from '@/features/change-language';
 
 const routes = [
   { path: ROUTES.HOME, title: 'home' },
   { path: ROUTES.ABOUT, title: 'about' }
 ];
-
-const languageModel = useLanguage();
 </script>
 
 <style scoped>
