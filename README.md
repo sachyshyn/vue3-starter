@@ -4,7 +4,8 @@
 
 1. `npm install`
 2. `npm run prepare`
-3. `npm run dev`
+3. create .env.local for local development
+4. `npm run dev`
 
 ## Technical Stack:
 
