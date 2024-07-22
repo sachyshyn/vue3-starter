@@ -3,14 +3,20 @@ import { isNullish } from '../utils';
 export class StorageService {
   constructor(private readonly storage: Storage) {}
 
-  get<T>(key: string): T | null {
+  get<T>(key: string): T | null;
+  get<T>(key: string, fallback: T): T;
+  get<T>(key: string, fallback?: T) {
     const storedValue = this.storage.getItem(key) as string;
 
-    if (isNullish(storedValue)) {
-      return null;
+    if (!isNullish(storedValue)) {
+      return JSON.parse(storedValue);
     }
 
-    return JSON.parse(storedValue);
+    if (fallback) {
+      return fallback;
+    }
+
+    return null;
   }
 
   set<T>(key: string, value: T) {
