@@ -29,7 +29,7 @@ export const translationService = {
   ) {
     const localeRegex = new RegExp(`\\/${locale}\\/.*\\.json$`);
 
-    const matchedPathsContent: Record<string, TranslationContent> = {};
+    const matchedPathsContent: Record<TranslationPath, TranslationContent> = {};
 
     for (const currentPath in pathsToMatch) {
       if (localeRegex.test(currentPath)) {
@@ -48,19 +48,24 @@ export const translationService = {
     for (const translationPath in translations) {
       const keys = translationPath.split('/');
 
-      keys.reduce((acc, key, index) => {
-        // Ensure the current level is an object
-        if (!acc[key]) {
-          acc[key] = {};
-        }
+      let currentNestingLevel = combinedTranslations;
+
+      for (let i = 0; i < keys.length; i++) {
+        const key = keys[i];
 
         // If it's the last key, set the value
-        if (index === keys.length - 1) {
-          acc[key] = translations[translationPath];
-        }
+        if (i === keys.length - 1) {
+          currentNestingLevel[key] = translations[translationPath];
+        } else {
+          // Ensure the current level is an object
+          if (!currentNestingLevel[key]) {
+            currentNestingLevel[key] = {};
+          }
 
-        return acc[key];
-      }, combinedTranslations);
+          // Move to the next level
+          currentNestingLevel = currentNestingLevel[key];
+        }
+      }
     }
 
     return combinedTranslations;
