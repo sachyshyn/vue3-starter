@@ -1,2 +1,2 @@
-export type { Application, Locale, LocaleMessages } from './types';
+export type { Application, Locale } from './types';
 export { translationService } from './services';
