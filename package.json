@@ -14,7 +14,7 @@
     "test:e2e": "start-server-and-test preview http://localhost:4173 'cypress run --e2e'",
     "lint:js": "eslint . --ext .ts,.js,.vue --ignore-path .gitignore",
     "lint:style": "npx stylelint \"src/**/*.css\"",
-    "format": "prettier --write ./",
+    "format": "prettier --write",
     "prepare": "husky"
   },
   "dependencies": {
@@ -38,8 +38,9 @@
     "eslint": "^8.57.0",
     "eslint-plugin-cypress": "^3.3.0",
     "eslint-plugin-vue": "^9.23.0",
-    "husky": "^9.0.11",
+    "husky": "^9.1.1",
     "jsdom": "^24.1.0",
+    "lint-staged": "^15.2.7",
     "npm-run-all2": "^6.2.0",
     "prettier": "^3.2.5",
     "rollup": "^4.19.0",
