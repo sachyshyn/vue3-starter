@@ -24,25 +24,38 @@ export default defineConfig(({ mode }) => {
       rollupOptions: {
         output: {
           assetFileNames: (assetInfo: PreRenderedAsset) => {
+            const assetPaths = {
+              default: 'assets/[name]-[hash][extname]',
+              styles: 'assets/styles/[name]-[hash][extname]',
+              fonts: 'assets/fonts/[name][extname]',
+              images: 'assets/images/[name][extname]'
+            };
+
             if (!assetInfo.name) {
-              return 'assets/[name]-[hash][extname]';
+              return assetPaths.default;
             }
 
             const extType = assetInfo.name.split('.').pop()!;
 
-            if (/css/.test(extType)) {
-              return 'assets/styles/[name]-[hash][extname]';
+            const assetRegexps = {
+              styles: /css/,
+              fonts: /woff|woff2|eot|ttf|otf/,
+              images: /png|jpe?g|svg|gif|ico|webp|avif/
+            };
+
+            if (assetRegexps.styles.test(extType)) {
+              return assetPaths.styles;
             }
 
-            if (/woff|woff2|eot|ttf|otf/.test(extType)) {
-              return 'assets/fonts/[name][extname]';
+            if (assetRegexps.fonts.test(extType)) {
+              return assetPaths.fonts;
             }
 
-            if (/png|jpe?g|svg|gif|ico|webp|avif/.test(extType)) {
-              return 'assets/images/[name][extname]';
+            if (assetRegexps.images.test(extType)) {
+              return assetPaths.images;
             }
 
-            return 'assets/[name]-[hash][extname]';
+            return assetPaths.default;
           },
           chunkFileNames: 'assets/js/[name]-[hash].js',
           entryFileNames: 'assets/js/[name]-[hash].js'
