@@ -21,6 +21,7 @@ export default defineConfig(({ mode }) => {
       }
     },
     build: {
+      // add target 'es2015' for compatibility with older browsers
       rollupOptions: {
         output: {
           assetFileNames: (assetInfo: PreRenderedAsset) => {
