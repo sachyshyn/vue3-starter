@@ -9,7 +9,7 @@
 
 ## Technical Stack:
 
-- [Vue](https://vuejs.org/)
+- [Vue 3](https://vuejs.org/)
 - [Vite](https://vitejs.dev/guide/)
 
 ## Package Managers:
@@ -26,7 +26,7 @@
 
 ## Architecture:
 
-- [Feature-Sliced Design](https://feature-sliced.design/) (slightly augmented)
+- FSD Driven ([see reference](https://feature-sliced.design/docs/get-started/overview))
 
 ## Prerequisites:
 
