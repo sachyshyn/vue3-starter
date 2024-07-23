@@ -52,25 +52,26 @@ export const translationService = {
     const combinedTranslations: Record<Partial<TranslationPath>, TranslationContent> = {};
 
     for (const translationPath in translations) {
-      const keys = translationPath.split('/');
+      const translationKeys = translationPath.split('/');
 
       let currentNestingLevel = combinedTranslations;
 
-      for (let i = 0; i < keys.length; i++) {
-        const key = keys[i];
+      for (let index = 0; index < translationKeys.length; index++) {
+        const key = translationKeys[index];
 
-        // If it's the last key, set the value
-        if (i === keys.length - 1) {
+        // If it's the last key, set the value and skip this iteration
+        if (index === translationKeys.length - 1) {
           currentNestingLevel[key] = translations[translationPath];
-        } else {
-          // Ensure the current level is an object
-          if (!currentNestingLevel[key]) {
-            currentNestingLevel[key] = {};
-          }
-
-          // Move to the next level
-          currentNestingLevel = currentNestingLevel[key];
+          continue;
         }
+
+        // Ensure the current level is an object
+        if (!currentNestingLevel[key]) {
+          currentNestingLevel[key] = {};
+        }
+
+        // Move to the next level
+        currentNestingLevel = currentNestingLevel[key];
       }
     }
 
