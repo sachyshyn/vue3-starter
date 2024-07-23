@@ -7,6 +7,6 @@ export const APP_DEFAULT_LOCALE = 'en';
 export const i18n = createI18n({
   legacy: false,
   locale: APP_DEFAULT_LOCALE,
-  fallbackLocale: 'en',
+  fallbackLocale: APP_DEFAULT_LOCALE,
   messages: {} as Record<Locale, any>
 });

@@ -1,6 +1,7 @@
-import { i18n } from '@/shared/config';
-import { type Application } from '@/shared/lib';
+import { translationService, type Application } from '@/shared/lib';
 
 export function withTranslationProvider(app: Application) {
-  app.use(i18n);
+  translationService.applyPersistedLocaleIfExists();
+
+  app.use(translationService.getCurrentInstance());
 }

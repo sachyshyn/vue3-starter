@@ -9,7 +9,7 @@ export async function initApp() {
 
   applyProviders(app);
 
-  await translationService.loadTranslationMessages(translationService.defaultLocale);
+  await translationService.loadTranslationMessages(translationService.currentLocale);
 
   app.mount('#app');
 }
