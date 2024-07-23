@@ -40,7 +40,7 @@
   - [Vue Test Utils](https://test-utils.vuejs.org/)
   - [Cypress](https://www.cypress.io/)
 
-[Commands](./package.json)
+## Commands
 
 | Command              | Description                                                                      |
 | -------------------- | -------------------------------------------------------------------------------- |
