@@ -24,6 +24,6 @@ const languageModel = useLanguage();
 
 <style scoped>
 #i18n-lang-changer {
-  margin-left: 0.5rem;
+  margin-left: 0.825rem;
 }
 </style>

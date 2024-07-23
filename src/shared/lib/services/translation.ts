@@ -14,6 +14,7 @@ export class TranslationService {
     private readonly i18n: typeof TranslationConfig,
     private readonly storageService: StorageService
   ) {}
+
   get defaultLocale(): Locale {
     return APP_DEFAULT_LOCALE;
   }
@@ -25,8 +26,7 @@ export class TranslationService {
   set currentLocale(locale: Locale) {
     this.i18n.global.locale.value = locale;
 
-    this.setPersistedLocale(locale);
-    document.querySelector('html')!.setAttribute('lang', locale);
+    this.updateLocaleSettings(locale);
   }
 
   get availableLocales() {
@@ -37,18 +37,29 @@ export class TranslationService {
     return !!this.availableLocales.find((l) => l === locale);
   }
 
-  getCurrentInstance() {
+  getCurrentInstance(): typeof TranslationConfig {
     return this.i18n;
   }
 
-  async fetchTranslations(pathsToMatch: Record<TranslationPath, () => Promise<TranslationESM>>, locale: Locale) {
-    const localeRegex = new RegExp(`\\/${locale}\\/.*\\.json$`);
+  private createLocaleRegex(locale: Locale) {
+    return new RegExp(`\\/${locale}\\/.*\\.json$`);
+  }
+
+  private extractTranslationPath(path: TranslationPath, locale: Locale): Partial<TranslationPath> {
+    return path.split(`/${locale}/`)[1].replace('.json', '');
+  }
+
+  private async fetchTranslations(
+    pathsToMatch: Record<TranslationPath, () => Promise<TranslationESM>>,
+    locale: Locale
+  ) {
+    const localeRegex = this.createLocaleRegex(locale);
 
     const matchedPathsContent: Record<TranslationPath, TranslationContent> = {};
 
     for (const currentPath in pathsToMatch) {
       if (localeRegex.test(currentPath)) {
-        const translationPath = currentPath.split(`/${locale}/`)[1].replace('.json', '');
+        const translationPath = this.extractTranslationPath(currentPath, locale);
         const content = await pathsToMatch[currentPath]();
         matchedPathsContent[translationPath] = content.default;
       }
@@ -57,7 +68,7 @@ export class TranslationService {
     return matchedPathsContent;
   }
 
-  combineTranslations(translations: Record<TranslationPath, TranslationContent>) {
+  private combineTranslations(translations: Record<TranslationPath, TranslationContent>) {
     const combinedTranslations: Record<Partial<TranslationPath>, TranslationContent> = {};
 
     for (const translationPath in translations) {
@@ -105,11 +116,11 @@ export class TranslationService {
     this.currentLocale = locale;
   }
 
-  getPersistedLocale() {
+  private getPersistedLocale() {
     return this.storageService.get<Locale>(PERSISTED_LOCALE_KEY);
   }
 
-  setPersistedLocale(locale: Locale) {
+  private setPersistedLocale(locale: Locale) {
     this.storageService.set(PERSISTED_LOCALE_KEY, locale);
   }
 
@@ -123,5 +134,10 @@ export class TranslationService {
 
     const isLocaleSupported = this.isLocaleSupported(locale);
     this.currentLocale = isLocaleSupported ? locale : this.defaultLocale;
+  }
+
+  private updateLocaleSettings(locale: Locale) {
+    this.setPersistedLocale(locale);
+    document.querySelector('html')?.setAttribute('lang', locale);
   }
 }
