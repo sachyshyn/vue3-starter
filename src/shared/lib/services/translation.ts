@@ -1,36 +1,45 @@
 import { nextTick } from 'vue';
-import { APP_DEFAULT_LOCALE, i18n, LOCALES } from '@/shared/config';
+import { APP_DEFAULT_LOCALE, LOCALES } from '@/shared/config';
+import type { translationConfig as TranslationConfig } from '@/shared/config';
+import type { StorageService } from './storage';
 import type { Locale } from '../types';
+import { PERSISTED_LOCALE_KEY } from '../constants';
 
 type TranslationContent = Record<string, any>;
 type TranslationPath = string;
 type TranslationESM = { default: TranslationContent };
 
-export const translationService = {
+export class TranslationService {
+  constructor(
+    private readonly i18n: typeof TranslationConfig,
+    private readonly storageService: StorageService
+  ) {}
   get defaultLocale(): Locale {
     return APP_DEFAULT_LOCALE;
-  },
+  }
 
   get currentLocale(): Locale {
-    return i18n.global.locale.value;
-  },
+    return this.i18n.global.locale.value;
+  }
 
   set currentLocale(locale: Locale) {
-    i18n.global.locale.value = locale;
+    this.i18n.global.locale.value = locale;
+
     this.setPersistedLocale(locale);
-  },
+    document.querySelector('html')!.setAttribute('lang', locale);
+  }
 
   get availableLocales() {
     return [...LOCALES];
-  },
+  }
 
   isLocaleSupported(locale: Locale) {
     return !!this.availableLocales.find((l) => l === locale);
-  },
+  }
 
   getCurrentInstance() {
-    return i18n;
-  },
+    return this.i18n;
+  }
 
   async fetchTranslations(pathsToMatch: Record<TranslationPath, () => Promise<TranslationESM>>, locale: Locale) {
     const localeRegex = new RegExp(`\\/${locale}\\/.*\\.json$`);
@@ -46,7 +55,7 @@ export const translationService = {
     }
 
     return matchedPathsContent;
-  },
+  }
 
   combineTranslations(translations: Record<TranslationPath, TranslationContent>) {
     const combinedTranslations: Record<Partial<TranslationPath>, TranslationContent> = {};
@@ -76,38 +85,36 @@ export const translationService = {
     }
 
     return combinedTranslations;
-  },
+  }
 
   async loadTranslationMessages(locale: Locale) {
-    if (!i18n.global.availableLocales.includes(locale)) {
+    if (!this.i18n.global.availableLocales.includes(locale)) {
       const localeJsonsPaths = import.meta.glob<TranslationESM>('@/shared/config/i18n/locales/**/*.json');
 
       const translations = await this.fetchTranslations(localeJsonsPaths, locale);
       const localeMessages = this.combineTranslations(translations);
 
-      i18n.global.setLocaleMessage(locale, localeMessages);
+      this.i18n.global.setLocaleMessage(locale, localeMessages);
     }
 
     return nextTick();
-  },
+  }
 
   async switchLanguage(locale: Locale) {
     await this.loadTranslationMessages(locale);
     this.currentLocale = locale;
-    document.querySelector('html')!.setAttribute('lang', locale);
-  },
+  }
 
-  getPersistedLocale(): Locale | null {
-    const locale = localStorage.getItem('i18n-locale');
-    return locale ? JSON.parse(locale) : null;
-  },
+  getPersistedLocale() {
+    return this.storageService.get<Locale>(PERSISTED_LOCALE_KEY);
+  }
 
   setPersistedLocale(locale: Locale) {
-    localStorage.setItem('i18n-locale', JSON.stringify(locale));
-  },
+    this.storageService.set(PERSISTED_LOCALE_KEY, locale);
+  }
 
   applyPersistedLocaleIfExists() {
-    const locale = translationService.getPersistedLocale();
+    const locale = this.getPersistedLocale();
 
     if (!locale) {
       this.currentLocale = this.defaultLocale;
@@ -117,4 +124,4 @@ export const translationService = {
     const isLocaleSupported = this.isLocaleSupported(locale);
     this.currentLocale = isLocaleSupported ? locale : this.defaultLocale;
   }
-};
+}
