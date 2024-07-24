@@ -1,8 +1,7 @@
 import { nextTick } from 'vue';
 import { APP_DEFAULT_LOCALE, LOCALES } from '@/shared/config';
 import type { translationConfig as TranslationConfig } from '@/shared/config';
-import type { StorageService } from './storage';
-import type { Locale } from '../types';
+import type { Locale, IStorageService } from '../types';
 import { PERSISTED_LOCALE_KEY } from '../constants';
 
 type TranslationContent = Record<string, any>;
@@ -12,7 +11,7 @@ type TranslationESM = { default: TranslationContent };
 export class TranslationService {
   constructor(
     private readonly i18n: typeof TranslationConfig,
-    private readonly storageService: StorageService
+    private readonly storageService: IStorageService
   ) {}
 
   get defaultLocale(): Locale {

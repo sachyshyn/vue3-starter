@@ -1,6 +1,8 @@
 import { isNullish } from '../utils';
 
-export class StorageService {
+import type { IStorageService } from '../types';
+
+export class StorageService implements IStorageService {
   constructor(private readonly storage: Storage) {}
 
   get<T>(key: string): T | null;

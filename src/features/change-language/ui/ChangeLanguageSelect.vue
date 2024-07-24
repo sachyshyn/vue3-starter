@@ -6,7 +6,7 @@
       :aria-label="$t('common.change_language')"
       name="i18n-lang-changer"
       id="i18n-lang-changer"
-      v-model="languageModel"
+      v-model="changeLanguageModel"
     >
       <option v-for="locale of translationService.availableLocales" :key="locale" :value="locale">
         {{ locale }}
@@ -17,9 +17,9 @@
 
 <script setup lang="ts">
 import { translationService } from '@/shared/lib';
-import { useLanguage } from '../model';
+import { useChangeLanguageModel } from '../model';
 
-const languageModel = useLanguage();
+const changeLanguageModel = useChangeLanguageModel();
 </script>
 
 <style scoped>

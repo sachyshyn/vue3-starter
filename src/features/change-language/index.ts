@@ -1,2 +1,2 @@
-export { useLanguage } from './model';
+export { useChangeLanguageModel } from './model';
 export { ChangeLanguageSelect } from './ui';
