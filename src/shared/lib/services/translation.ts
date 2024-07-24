@@ -29,12 +29,12 @@ export class TranslationService {
     this.updateLocaleSettings(locale);
   }
 
-  get availableLocales() {
+  get availableLocales(): Locale[] {
     return [...LOCALES];
   }
 
   isLocaleSupported(locale: Locale) {
-    return !!this.availableLocales.find((l) => l === locale);
+    return this.availableLocales.includes(locale);
   }
 
   getCurrentInstance(): typeof TranslationConfig {
@@ -73,26 +73,16 @@ export class TranslationService {
 
     for (const translationPath in translations) {
       const translationKeys = translationPath.split('/');
-
       let currentNestingLevel = combinedTranslations;
 
-      for (let index = 0; index < translationKeys.length; index++) {
-        const key = translationKeys[index];
-
-        // If it's the last key, set the value and skip this iteration
+      translationKeys.forEach((key, index) => {
         if (index === translationKeys.length - 1) {
           currentNestingLevel[key] = translations[translationPath];
-          continue;
+        } else {
+          currentNestingLevel[key] = currentNestingLevel[key] || {};
+          currentNestingLevel = currentNestingLevel[key];
         }
-
-        // Ensure the current level is an object
-        if (!currentNestingLevel[key]) {
-          currentNestingLevel[key] = {};
-        }
-
-        // Move to the next level
-        currentNestingLevel = currentNestingLevel[key];
-      }
+      });
     }
 
     return combinedTranslations;
@@ -108,7 +98,7 @@ export class TranslationService {
       this.i18n.global.setLocaleMessage(locale, localeMessages);
     }
 
-    return nextTick();
+    await nextTick();
   }
 
   async switchLanguage(locale: Locale) {
@@ -126,13 +116,8 @@ export class TranslationService {
 
   applyPersistedLocaleIfExists() {
     const locale = this.getPersistedLocale();
+    const isLocaleSupported = !!locale && this.isLocaleSupported(locale);
 
-    if (!locale) {
-      this.currentLocale = this.defaultLocale;
-      return;
-    }
-
-    const isLocaleSupported = this.isLocaleSupported(locale);
     this.currentLocale = isLocaleSupported ? locale : this.defaultLocale;
   }
 
