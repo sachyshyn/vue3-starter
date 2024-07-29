@@ -1,7 +1,11 @@
 <template>
   <header>
     <div class="container header__container">
-      <p>{{ t('common.app_template_message', { api_url: APP_API_URL }) }}</p>
+      <p>
+        <img :src="imgUrl" height="20" width="20" loading="lazy" alt="App Logo" />
+        <span>{{ t('common.app_template_message', { api_url: APP_API_URL }) }}</span>
+      </p>
+
       <ul>
         <li v-for="route of routes" :key="route.path">
           <RouterLink :to="route.path">{{ route.title }}</RouterLink>
@@ -22,6 +26,8 @@ import { ChangeLanguageSelect } from '@/features/change-language';
 import { useI18n } from 'vue-i18n';
 import { computed } from 'vue';
 
+const imgUrl = new URL('@/shared/assets/images/img.png', import.meta.url).href;
+
 const { t } = useI18n();
 
 const routes = computed(() => [
@@ -35,6 +41,12 @@ ul {
   display: flex;
   list-style: none;
   gap: 0.5rem;
+}
+
+p {
+  display: inline-flex;
+  gap: 0.5rem;
+  align-items: center;
 }
 
 .container {
