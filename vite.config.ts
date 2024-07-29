@@ -41,7 +41,7 @@ export default defineConfig(({ mode }) => {
             const assetRegexps = {
               styles: /css/,
               fonts: /woff|woff2|eot|ttf|otf/,
-              images: /png|jpe?g|svg|gif|ico|webp|avif/
+              images: /png|jpe?g|gif|ico|webp|avif/
             };
 
             if (assetRegexps.styles.test(extType)) {
