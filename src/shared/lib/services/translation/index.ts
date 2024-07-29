@@ -3,10 +3,7 @@ import { APP_DEFAULT_LOCALE, LOCALES } from '@/shared/config';
 import type { translationConfig as TranslationConfig } from '@/shared/config';
 import type { Locale, IStorageService } from '../../types';
 import { PERSISTED_LOCALE_KEY } from '../../constants';
-
-type TranslationContent = Record<string, any>;
-type TranslationPath = string;
-type TranslationESM = { default: TranslationContent };
+import { localeHelper } from './helper';
 
 export class TranslationService {
   constructor(
@@ -40,59 +37,9 @@ export class TranslationService {
     return this.i18n;
   }
 
-  private createLocaleRegex(locale: Locale) {
-    return new RegExp(`\\/${locale}\\/.*\\.json$`);
-  }
-
-  private extractTranslationPath(path: TranslationPath, locale: Locale): Partial<TranslationPath> {
-    return path.split(`/${locale}/`)[1].replace('.json', '');
-  }
-
-  private async fetchTranslations(
-    pathsToMatch: Record<TranslationPath, () => Promise<TranslationESM>>,
-    locale: Locale
-  ) {
-    const localeRegex = this.createLocaleRegex(locale);
-
-    const matchedPathsContent: Record<TranslationPath, TranslationContent> = {};
-
-    for (const currentPath in pathsToMatch) {
-      if (localeRegex.test(currentPath)) {
-        const translationPath = this.extractTranslationPath(currentPath, locale);
-        const content = await pathsToMatch[currentPath]();
-        matchedPathsContent[translationPath] = content.default;
-      }
-    }
-
-    return matchedPathsContent;
-  }
-
-  private combineTranslations(translations: Record<TranslationPath, TranslationContent>) {
-    const combinedTranslations: Record<Partial<TranslationPath>, TranslationContent> = {};
-
-    for (const translationPath in translations) {
-      const translationKeys = translationPath.split('/');
-      let currentNestingLevel = combinedTranslations;
-
-      translationKeys.forEach((key, index) => {
-        if (index === translationKeys.length - 1) {
-          currentNestingLevel[key] = translations[translationPath];
-        } else {
-          currentNestingLevel[key] = currentNestingLevel[key] || {};
-          currentNestingLevel = currentNestingLevel[key];
-        }
-      });
-    }
-
-    return combinedTranslations;
-  }
-
   async loadTranslationMessages(locale: Locale) {
     if (!this.i18n.global.availableLocales.includes(locale)) {
-      const localeJsonsPaths = import.meta.glob<TranslationESM>('@/shared/config/i18n/locales/**/*.json');
-
-      const translations = await this.fetchTranslations(localeJsonsPaths, locale);
-      const localeMessages = this.combineTranslations(translations);
+      const localeMessages = await localeHelper.loadTranslationMessages(locale);
 
       this.i18n.global.setLocaleMessage(locale, localeMessages);
     }
