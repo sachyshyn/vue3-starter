@@ -2,7 +2,7 @@
   <header>
     <div class="container header__container">
       <p>
-        <img :src="imgUrl" height="20" width="20" loading="lazy" alt="App Logo" />
+        <img src="@/shared/assets/images/img.png" height="20" width="20" loading="lazy" alt="App Logo" />
         <span>{{ t('common.app_template_message', { api_url: APP_API_URL }) }}</span>
       </p>
 
@@ -25,8 +25,6 @@ import { RouterLink, RouterView } from 'vue-router';
 import { ChangeLanguageSelect } from '@/features/change-language';
 import { useI18n } from 'vue-i18n';
 import { computed } from 'vue';
-
-const imgUrl = new URL('@/shared/assets/images/img.png', import.meta.url).href;
 
 const { t } = useI18n();
 
