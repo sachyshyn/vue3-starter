@@ -19,6 +19,8 @@
 2. Prepare [Husky](https://typicode.github.io/husky/) for git hooks `npm run prepare`
 3. Create `.env.local` for local development and define at least the `APP_API_URL` variable (see [example](./.env.example))
 4. Start the development server `npm run dev`
+5. Create `.env.production.local` for local build and define at least the `APP_API_URL` variable (see [example](./.env.example))
+6. Build the application `npm run build`
 
 ## Technical Stack:
 
