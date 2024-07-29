@@ -1,5 +1,5 @@
-import Home from '@/pages/Home.vue';
-import { ROUTES } from '@/shared/config/routes';
+import { HomePage } from '@/pages/Home';
+import { ROUTES } from '@/shared/config';
 import type { Application } from '@/shared/lib';
 import { createRouter, createWebHistory } from 'vue-router';
 
@@ -8,12 +8,16 @@ function createRoutes() {
     {
       path: ROUTES.HOME,
       name: 'home',
-      component: Home
+      component: HomePage
     },
     {
       path: ROUTES.ABOUT,
       name: 'about',
-      component: async () => await import('@/pages/About.vue')
+      component: async () => {
+        const { AboutPage } = await import('@/pages/About');
+
+        return AboutPage;
+      }
     }
   ];
 
