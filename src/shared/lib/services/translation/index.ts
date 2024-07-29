@@ -1,8 +1,8 @@
 import { nextTick } from 'vue';
 import { APP_DEFAULT_LOCALE, LOCALES } from '@/shared/config';
 import type { translationConfig as TranslationConfig } from '@/shared/config';
-import type { Locale, IStorageService } from '../types';
-import { PERSISTED_LOCALE_KEY } from '../constants';
+import type { Locale, IStorageService } from '../../types';
+import { PERSISTED_LOCALE_KEY } from '../../constants';
 
 type TranslationContent = Record<string, any>;
 type TranslationPath = string;

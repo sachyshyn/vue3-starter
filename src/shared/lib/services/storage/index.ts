@@ -1,6 +1,6 @@
-import { isNullish } from '../utils';
+import { isNullish } from '../../utils';
 
-import type { IStorageService } from '../types';
+import type { IStorageService } from '../../types';
 
 export class StorageService implements IStorageService {
   constructor(private readonly storage: Storage) {}
