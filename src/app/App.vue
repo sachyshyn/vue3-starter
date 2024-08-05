@@ -20,17 +20,17 @@
 </template>
 
 <script setup lang="ts">
-import { APP_API_URL, ROUTES } from '@/shared/config';
-import { RouterLink, RouterView } from 'vue-router';
+import { APP_API_URL } from '@/shared/config';
+import { RouterLink, RouterView, type RouteMap } from 'vue-router';
 import { ChangeLanguageSelect } from '@/features/change-language';
 import { useI18n } from 'vue-i18n';
 import { computed } from 'vue';
 
 const { t } = useI18n();
 
-const routes = computed(() => [
-  { path: ROUTES.HOME, title: t('pages.home.link') },
-  { path: ROUTES.ABOUT, title: t('pages.about.link') }
+const routes = computed<Array<{ path: keyof RouteMap; title: string }>>(() => [
+  { path: '/', title: t('pages.home.link') },
+  { path: '/about', title: t('pages.about.link') }
 ]);
 </script>
 
