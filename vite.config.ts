@@ -1,6 +1,7 @@
 import { fileURLToPath, URL } from 'node:url';
 import { defineConfig, loadEnv } from 'vite';
-import vue from '@vitejs/plugin-vue';
+import Vue from '@vitejs/plugin-vue';
+import pageBasedRouter from 'unplugin-vue-router/vite';
 import { type PreRenderedAsset } from 'rollup';
 
 export default defineConfig(({ mode }) => {
@@ -9,7 +10,13 @@ export default defineConfig(({ mode }) => {
   const DEFAULT_PORT = 3000;
 
   return {
-    plugins: [vue()],
+    plugins: [
+      pageBasedRouter({
+        extensions: ['.vue'],
+        dts: 'src/shared/config/router/typed-router.d.ts'
+      }),
+      Vue()
+    ],
     envPrefix: ENV_PREFIX,
     server: {
       host: true,
