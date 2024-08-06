@@ -2,6 +2,7 @@ import { fileURLToPath, URL } from 'node:url';
 import { defineConfig, loadEnv } from 'vite';
 import Vue from '@vitejs/plugin-vue';
 import pageBasedRouter from 'unplugin-vue-router/vite';
+import Layouts from 'vite-plugin-vue-layouts';
 import { type PreRenderedAsset } from 'rollup';
 
 export default defineConfig(({ mode }) => {
@@ -15,7 +16,8 @@ export default defineConfig(({ mode }) => {
         extensions: ['.vue'],
         dts: 'src/shared/config/router/typed-router.d.ts'
       }),
-      Vue()
+      Vue(),
+      Layouts()
     ],
     envPrefix: ENV_PREFIX,
     server: {

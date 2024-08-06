@@ -10,9 +10,15 @@
 
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n';
-import { RouterLink } from 'vue-router';
+import { RouterLink, definePage } from 'vue-router/auto';
 
 const { t } = useI18n();
+
+definePage({
+  meta: {
+    layout: 'not_found'
+  }
+});
 </script>
 
 <style scoped>

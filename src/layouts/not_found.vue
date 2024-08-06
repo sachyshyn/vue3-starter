@@ -1,4 +1,5 @@
 <template>
+  <p style="margin: 2rem">[ NOT FOUND LAYOUT ]</p>
   <RouterView />
 </template>
 
