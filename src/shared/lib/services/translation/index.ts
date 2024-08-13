@@ -1,13 +1,13 @@
 import { nextTick } from 'vue';
-import { APP_DEFAULT_LOCALE, LOCALES } from '@/shared/config';
-import type { translationConfig as TranslationConfig } from '@/shared/config';
+import { APP_DEFAULT_LOCALE, LOCALES } from '@/shared/i18n';
+import type { i18n as TranslationInstance } from '@/shared/i18n';
 import type { Locale, IStorageService } from '../../types';
 import { PERSISTED_LOCALE_KEY } from '../../constants';
 import { localeHelper } from './helper';
 
 export class TranslationService {
   constructor(
-    private readonly i18n: typeof TranslationConfig,
+    private readonly i18n: typeof TranslationInstance,
     private readonly storageService: IStorageService
   ) {}
 
@@ -33,7 +33,7 @@ export class TranslationService {
     return this.availableLocales.includes(locale);
   }
 
-  getCurrentInstance(): typeof TranslationConfig {
+  getCurrentInstance(): typeof TranslationInstance {
     return this.i18n;
   }
 

@@ -47,7 +47,7 @@ function combineTranslations(translations: Record<TranslationPath, TranslationCo
 
 export const localeHelper = {
   async loadTranslationMessages(locale: Locale) {
-    const localeJsonsPaths = import.meta.glob<TranslationESM>('@/shared/config/i18n/locales/**/*.json');
+    const localeJsonsPaths = import.meta.glob<TranslationESM>('@/shared/i18n/locales/**/*.json');
 
     const translations = await fetchTranslations(localeJsonsPaths, locale);
     const localeMessages = combineTranslations(translations);

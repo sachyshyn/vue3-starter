@@ -4,7 +4,7 @@ import type { Locale } from '@/shared/lib';
 export const LOCALES = ['en', 'ru'] as const;
 export const APP_DEFAULT_LOCALE = 'en';
 
-export const translationConfig = createI18n({
+export const i18n = createI18n({
   legacy: false,
   locale: APP_DEFAULT_LOCALE,
   fallbackLocale: APP_DEFAULT_LOCALE,

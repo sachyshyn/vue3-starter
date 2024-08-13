@@ -13,7 +13,7 @@ export default defineConfig(({ mode }) => {
     plugins: [
       pageBasedRouter({
         extensions: ['.vue'],
-        dts: 'src/shared/config/router/typed-router.d.ts'
+        dts: 'src/shared/config/typed-router.d.ts'
       }),
       Vue()
     ],
