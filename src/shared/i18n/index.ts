@@ -1,8 +1,10 @@
 import { createI18n } from 'vue-i18n';
-import type { Locale } from '@/shared/lib';
 
 export const LOCALES = ['en', 'ru'] as const;
-export const APP_DEFAULT_LOCALE = 'en';
+
+export type Locale = (typeof LOCALES)[number];
+
+export const APP_DEFAULT_LOCALE: Locale = 'en';
 
 export const i18n = createI18n({
   legacy: false,
@@ -10,3 +12,5 @@ export const i18n = createI18n({
   fallbackLocale: APP_DEFAULT_LOCALE,
   messages: {} as Record<Locale, any>
 });
+
+export const PERSISTED_LOCALE_KEY = 'i18n-locale';

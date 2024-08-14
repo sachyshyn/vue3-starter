@@ -1,8 +1,7 @@
 import { nextTick } from 'vue';
-import { APP_DEFAULT_LOCALE, LOCALES } from '@/shared/i18n';
-import type { i18n as TranslationInstance } from '@/shared/i18n';
-import type { Locale, IStorageService } from '../../types';
-import { PERSISTED_LOCALE_KEY } from '../../constants';
+import { APP_DEFAULT_LOCALE, LOCALES, PERSISTED_LOCALE_KEY } from '@/shared/i18n';
+import type { i18n as TranslationInstance, Locale } from '@/shared/i18n';
+import type { IStorageService } from '../../types';
 import { localeHelper } from './helper';
 
 export class TranslationService {

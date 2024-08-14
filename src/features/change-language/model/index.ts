@@ -1,4 +1,5 @@
-import { translationService, type Locale } from '@/shared/lib';
+import { translationService } from '@/shared/lib';
+import type { Locale } from '@/shared/i18n';
 import { computed } from 'vue';
 
 export function useChangeLanguageModel() {

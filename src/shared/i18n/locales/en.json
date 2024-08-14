@@ -1,0 +1,22 @@
+{
+  "common": {
+    "app_template_message": "App Template with api url {api_url}",
+    "change_language": "Change Language",
+    "current_language": "Current Language"
+  },
+  "pages": {
+    "home": {
+      "title": "Home Page",
+      "link": "Home"
+    },
+    "about": {
+      "title": "About Page",
+      "link": "About"
+    },
+    "not_found": {
+      "title": "Not found",
+      "description": "Page you're looking for does not exist",
+      "actions_back": "Return to home page"
+    }
+  }
+}
